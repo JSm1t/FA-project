@@ -1,13 +1,55 @@
 1. Callback Hell
-- Wrap getUser in promise
-- wrap getRelatedDogsforuser in promise
-- Async/await
+- Wrap getUser in promise:
+  const getUserPromise = new Promise((resolve, reject) => {
+    getUser((err, data) => {
+      if(err) return reject(err);
+      resolve(data);      
+    })
+  })
+- Wrap getRelatedDogsforuser in promise:
+  const getRelatedDogsForUserPromise = (userId) => {
+    return new Promise((resolve, reject) => {
+      getRelatedDogsForUser((err, data) => {
+        if(err) return reject(err);
+        console.log(data)
+        resolve(data);
+      }
+    })
+  }
+
+- Chain beide promises aan elkaar:
+  getUserPromise()
+    .then((data) => {
+      return getRelatedDogsForUserPromise(data.userId)
+    })
+    .then((relatedDogsData) => {
+      //do something with dogrelateddata
+    })
+    .catch((err) => {
+      //handle error
+    })
+
+- Alternatief: Async/await
+  try {
+    const userData = await getUserPromise();
+    const relatedDogData = await getRelatedDogsForUserPromise(data.userId)
+  } catch (err) {
+    //handle error
+  }
 
 2. Pomises
-- 1. Kat, Hond
-- Geen resolve, reject..?
+- Kat
+  Hond
+- Resolve & Reject worden niet aangeroepen binnen de functie.
+- console.log --> mist console als context van 'this'.
+  console.log.bind(console) zou volgens mij wel moeten werken.
+  Hetzelfde geldt voor de catch.
 
 3. Wat is er mis met deze code?
-- SQL injection
-- Geen error handling --> .catch()
-- queryDB  undefined (mierenneuken)
+- SQL injection --> userId moet wel gesanitized worden.
+- Geen error handling bij de getUser functie call.
+  Een oplossing:
+
+  getUser(3)
+    .then((user) => console.log("User found: ", user));
+    .catch((err) => console.error(err));
