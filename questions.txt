@@ -1,0 +1,13 @@
+1. Callback Hell
+- Wrap getUser in promise
+- wrap getRelatedDogsforuser in promise
+- Async/await
+
+2. Pomises
+- 1. Kat, Hond
+- Geen resolve, reject..?
+
+3. Wat is er mis met deze code?
+- SQL injection
+- Geen error handling --> .catch()
+- queryDB  undefined (mierenneuken)
