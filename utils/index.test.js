@@ -69,5 +69,9 @@ describe('filterByProperty - testsuite', () => {
     const filteredArray = utils.filterByProperty(testData, 'array');
     expect(filteredArray).toEqual(testData);
   });
+
+  describe('filterByCombiProps', () => {
+    
+  })
 })
 

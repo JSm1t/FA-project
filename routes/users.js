@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
     results = utils.filterByProperties(results, ['firstName', 'lastName'], q.replace(' ', ''));
   }
 
-  // team_id should filter based on team id
+  // team_id should filter based on items teams array
   if(team_id) {
     let intTeam_id
     try {
@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
     results = utils.filterByProperty(results, 'teams', intTeam_id);
   }
   
-  //Sort results based on given property
+  //Sort results based on given property asc
   results = utils.sortByProperty(results, sortBySan);
   
   res.status(200).send(results);
